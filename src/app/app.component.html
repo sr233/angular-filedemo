@@ -1,20 +1,90 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div>
+    <h1 align="center">
+        Welcome to {{ title }}!
+    </h1>
+    <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/heroes">Heroes</a>
+    </nav>
+    <router-outlet></router-outlet>
+    <app-messages></app-messages>
 
+    <img width="300" alt="Angular Logo"
+         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+
+    <div style="padding: 10px; position:absolute;right: 500px;bottom: 300px;">
+        <div class="file-up">
+            <span class="fl btn-choose" style="margin-right: 6px;padding: 5px;font-size: 15px;" (click)="chooseFile()">选择文件</span>
+            <div class="fl file-name">{{upName}}</div>
+            <input class="fl area" type="file"
+                   [hidden]="true" ng2FileSelect
+                   [uploader]="fileUpload"
+                   (change)="onChange($event)" #file>
+            <span class="fl btn-upload" style="margin-left: 6px;padding: 5px;font-size: 15px;"
+                  (click)="upFile()">文件上传</span>
+        </div>
+
+        <div class="file-down">
+            <a href="{{downloadUrl+fileName}}">文件下载</a>
+            <input type="text" [(ngModel)]="fileName" placeholder="请输入文件名">
+        </div>
+
+    </div>
+
+    <span>{{'2019-04-29 10:22:33' | date:format}}</span>
+
+    <!--<form class="dropzone" #dropzoneForm>-->
+    <!--<div class="dz-text omit">-->
+    <!--<p class="dz-default dz-message">上传文件</p>-->
+    <!--</div>-->
+    <!--</form>-->
+
+    <!--<div>-->
+        <!--<video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered"-->
+               <!--width="1080px" height="720px" controls-->
+               <!--preload="auto"-->
+               <!--autoplay>-->
+            <!--<source src="../assets/movie.ogg" type="video/mp4">-->
+        <!--</video>-->
+    <!--</div>-->
+
+</div>
+
+<style>
+
+    div span {
+        color: #333;
+    }
+
+    .file-name {
+        width: 300px;
+        /* border: 1px solid #868686; */
+        height: 20px;
+        background: #272c32;
+        border-radius: 6px;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 5px;
+        text-indent: 10px;
+    }
+
+    .file-up .fl {
+        float: left;
+    }
+
+    .file-up, .file-down {
+        float: left;
+    }
+
+    .file-down {
+        clear: left;
+        margin-top: 10px;
+    }
+
+    .btn-choose, .btn-upload {
+        cursor: pointer;
+    }
+
+</style>

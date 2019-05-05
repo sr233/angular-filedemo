@@ -20,10 +20,13 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/video.min.js",
+              "src/assets/video-js.min.css"
             ],
             "styles": [
               "src/styles.css"
+
             ],
             "scripts": []
           },
